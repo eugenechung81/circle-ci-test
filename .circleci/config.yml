@@ -15,9 +15,11 @@ jobs:
       - run:
           name: test script
           command: |
+            pwd
             ls -rlta
             cd ~/repo
             ls -rlta
+            bash deploy.sh
   deploy:
     machine:
       enabled: true
