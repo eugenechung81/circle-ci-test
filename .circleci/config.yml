@@ -20,7 +20,7 @@ jobs:
     steps:
       - run:
           name: Deploy Over SSH
-          command: bash deploy.sh
+          command: ./deploy.sh
 
 workflows:
   version: 2
