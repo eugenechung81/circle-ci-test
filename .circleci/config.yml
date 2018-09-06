@@ -20,7 +20,9 @@ jobs:
     steps:
       - run:
           name: Deploy Over SSH
-          command: sudo sh deploy.sh
+          command: |
+            cd ~/repo
+            sudo sh deploy.sh
 
 workflows:
   version: 2
