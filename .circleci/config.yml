@@ -6,19 +6,38 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-
       - run:
           name: Build frontend
           command: |
             cd frontend
             npm install
+            npm run build
       - run:
-          name: Install Dependencies
+          name: Building backend
           command: |
             mkdir -p ./venv
             virtualenv ./venv
             . venv/bin/activate
             pip install -r backend/requirements.txt
+  test:
+    docker:
+      - image: circleci/python:2.7-jessie-node
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Building backend
+          command: |
+            mkdir -p ./venv
+            virtualenv ./venv
+            . venv/bin/activate
+            pip install -r backend/requirements.txt
+      - run:
+          name: Running Test
+          command: |
+            pip install nose
+            nosetests tests/unittest
+
 
   deploy:
     machine:
@@ -39,9 +58,10 @@ workflows:
   build-and-deploy:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
+      - test
+#      - deploy:
+#          requires:
+#            - build
+#          filters:
+#            branches:
+#              only: master
