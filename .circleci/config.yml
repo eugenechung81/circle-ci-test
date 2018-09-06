@@ -22,7 +22,7 @@ jobs:
           name: Deploy Over SSH
           command: |
             echo "Test"
-            ./deploy.sh
+            bash deploy.sh
 
 workflows:
   version: 2
