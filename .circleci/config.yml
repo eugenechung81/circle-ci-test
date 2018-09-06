@@ -22,7 +22,6 @@ jobs:
   test:
     docker:
       - image: circleci/python:2.7-jessie-node
-    working_directory: ~/repo
     steps:
       - checkout
       - run:
@@ -36,6 +35,8 @@ jobs:
           name: Running Test
           command: |
             sudo pip install nose
+            pwd
+            ls -rlta
             cd backend
             nosetests tests/unittest
 
