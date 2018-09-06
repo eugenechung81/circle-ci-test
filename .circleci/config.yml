@@ -12,7 +12,12 @@ jobs:
       - run:
           name: Print the Current Time
           command: date
-
+      - run:
+          name: test script
+          command: |
+            ls -rlta
+            cd ~/repo
+            ls -rlta
   deploy:
     machine:
       enabled: true
