@@ -19,31 +19,19 @@ jobs:
           name: Running tests
           command: |
             . venv/bin/activate
-#      - run:
-#          name: Greeting
-#          command: echo Hello, world.
-#      - run:
-#          name: Print the Current Time
-#          command: date
-#      - run:
-#          name: test script
-#          command: |
-#            pwd
-#            ls -rlta
-#            cd ~/repo
-#            ls -rlta
-#            bash deploy.sh
   deploy:
     machine:
       enabled: true
     working_directory: ~/repo
     steps:
+      - checkout
       - run:
           name: Deploy Over SSH
           command: |
             ls -rlta
             cd ~/repo
             ls -rlta
+            bash deploy.sh
 
 workflows:
   version: 2
