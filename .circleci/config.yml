@@ -21,8 +21,9 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
+            ls -rlta
             cd ~/repo
-            sudo sh deploy.sh
+            ls -rlta
 
 workflows:
   version: 2
