@@ -3,23 +3,36 @@ jobs:
   build:
     docker:
       - image: debian:stretch
+      - image: circleci/python:2.7
     working_directory: ~/repo
     steps:
       - checkout
-      - run:
-          name: Greeting
-          command: echo Hello, world.
-      - run:
-          name: Print the Current Time
-          command: date
-      - run:
-          name: test script
+
+      # BUILD - BACKEND
+      - run
+          name: Install Dependencies
           command: |
-            pwd
-            ls -rlta
-            cd ~/repo
-            ls -rlta
-            bash deploy.sh
+            python -m venv venv
+            . venv/bin/activate
+            python install -r requirements.txt
+      - run
+          name: Running tests
+          command: |
+            . venv/bin/activate
+#      - run:
+#          name: Greeting
+#          command: echo Hello, world.
+#      - run:
+#          name: Print the Current Time
+#          command: date
+#      - run:
+#          name: test script
+#          command: |
+#            pwd
+#            ls -rlta
+#            cd ~/repo
+#            ls -rlta
+#            bash deploy.sh
   deploy:
     machine:
       enabled: true
